@@ -10,9 +10,15 @@ class MusicianTest extends FunSpec with ShouldMatchers {
       "song c"
   )
   
-  val bassist = Musician(songs)
+  val bassist = Musician(Bass, songs)
   
   def musician = it
+
+  describe("general musician tests") {
+    musician("plays an instrument") {
+      bassist.instrument should be (Bass)
+    }
+  }
   
   describe("song suggestion tests") {
     
@@ -36,9 +42,14 @@ class MusicianTest extends FunSpec with ShouldMatchers {
     
     musician ("waits patiently before suggesting a song") {
       val start = new Date().getTime
-      bassist suggestSongIfNoOneElseDoes
+      val suggestionOrNot = bassist suggestSongIfNoOneElseDoes
       val elapsed = new Date().getTime - start
       elapsed should (be > 100L and be < 300L)
+      songs should contain (suggestionOrNot.get)
     }
+    
+    // TODO: need test for another musician speaking up before giving a suggestion.
+    
+    // TODO: think about race conditions
   }
 }

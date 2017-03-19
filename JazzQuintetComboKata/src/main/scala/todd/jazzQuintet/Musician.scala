@@ -3,7 +3,7 @@ package todd.jazzQuintet
 import java.util.Date
 import scala.util.Random
 
-class Musician(songs: Seq[String]) {
+class Musician(val instrument: Instrument, songs: Seq[String]) {
   private val random = new Random(new Date().getTime)
   
   def songSuggestion = songs(random.nextInt(songs.size))
@@ -22,5 +22,12 @@ class Musician(songs: Seq[String]) {
 }
 
 object Musician {
-  def apply(songs: Seq[String]) = new Musician(songs)
+  def apply(instrument: Instrument, songs: Seq[String]) = new Musician(instrument, songs)
 }
+
+abstract class Instrument()
+case object Trumpet extends Instrument
+case object Saxophone extends Instrument
+case object Piano extends Instrument
+case object Bass extends Instrument
+case object Drums extends Instrument
