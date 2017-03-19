@@ -5,13 +5,21 @@ class MusicianTest extends FunSpec with ShouldMatchers {
   
   val songs = Seq(
       "song a",
-      "song b"
+      "song b",
+      "song c"
   )
   
-  it("suggests random songs") {
-    val bassist = Musician(songs)
-    songs should contain (bassist.randomSong)
+  val bassist = Musician(songs)
+  
+  describe("song suggestion tests") {
+    it("suggests a random song") {
+      songs should contain (bassist.randomSong)
+    }
+    
+    it("eventually suggests every song") {
+      val suggestedSongs = (for (a <- 1 to 100) yield bassist.randomSong)
+        .toSet
+      suggestedSongs should be(songs.toSet)
+    }
   }
-  
-  
 }
