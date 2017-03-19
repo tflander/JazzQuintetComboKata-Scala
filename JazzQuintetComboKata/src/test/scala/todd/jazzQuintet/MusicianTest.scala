@@ -70,5 +70,33 @@ class MusicianTest extends FunSpec with ShouldMatchers {
     }
     
   }
+  
+  describe("Messaging tests") {
+    
+    musician("accepts his messages") {
+      val message = Message(to = Some(Bass), from = None, message = "foo")
+      bassist.processMessage(message)
+    }
+        
+    musician("accepts broadcast messages") {
+      val message = Message(to = Some(AllMusicians), from = None, message = "foo")
+      bassist.processMessage(message)      
+    }
+    
+    musician("does not get messages intended for others") {
+      val message = Message(to = Some(Trumpet), from = None, message = "foo")
+      intercept[IllegalArgumentException] {
+        bassist.processMessage(message)
+      }
+    }
+    
+    musician("does not get messages intended for no one") {
+      val message = Message(to = None, from = None, message = "foo")
+      intercept[IllegalArgumentException] {
+        bassist.processMessage(message)
+      }
+    }
+    
+  }
 
 }

@@ -49,9 +49,9 @@ class Musician(val name: String, val instrument: Instrument, songs: Seq[String],
   
 def processMessage(message: Message) = {
   
-    require(message.to == instrument, "invalid message:to.  Got " + message.to + ", expected " + instrument)
-
-    val hitJointPattern = "hitJoint(\\d+)".r
+    require(message.to != None, "This message was not intented to be routed")
+    val recipient = message.to.get  
+    require(recipient == AllMusicians || recipient.asInstanceOf[Instrument] == instrument, "invalid message:to.  Got " + recipient + ", expected " + instrument)
 
     message.message match {
 //      case "requestSupply" => stonerMessageHander.requestSupply(message)
@@ -64,7 +64,6 @@ def processMessage(message: Message) = {
       }
     }
   }
-
 
 }
 

@@ -1,6 +1,6 @@
 package todd.jazzQuintet
 
-case class Message(from: Option[Instrument], to: Instrument, message: String)
+case class Message(from: Option[Messageable], to: Option[Messageable], message: String)
 
 class MessageHandler(musician: Musician, out: java.io.ByteArrayOutputStream = null) {
 
