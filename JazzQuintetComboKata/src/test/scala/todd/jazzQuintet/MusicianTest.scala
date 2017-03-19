@@ -56,5 +56,19 @@ class MusicianTest extends FunSpec with ShouldMatchers {
     
     // TODO: think about race conditions
   }
+  
+  describe("Soloing tests") {
+    
+    musician("decides how long to solo") {
+      bassist.soloLengthInPhrases should (be (1)).or(be (2)).or(be (4))
+    }
+    
+    musician("eventually plays solos of every length") {
+      val soloLengths = (for (a <- 1 to 100) yield bassist soloLengthInPhrases)
+        .toSet
+      soloLengths should be(Set(1, 2, 4))
+    }
+    
+  }
 
 }

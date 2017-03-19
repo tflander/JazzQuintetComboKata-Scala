@@ -31,6 +31,14 @@ class Musician(val name: String, val instrument: Instrument, songs: Seq[String])
   }
   
   def knows(song: String) = songs.contains(song)
+  
+  def soloLengthInPhrases = {
+    val relativeLength = random.nextInt(3)
+    relativeLength match {
+      case 2 => 4
+      case notMax => notMax + 1 
+    }
+  }
 }
 
 object Musician {
