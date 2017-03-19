@@ -56,4 +56,5 @@ class MusicianTest extends FunSpec with ShouldMatchers {
     
     // TODO: think about race conditions
   }
+
 }
