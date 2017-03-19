@@ -10,13 +10,17 @@ class MusicianTest extends FunSpec with ShouldMatchers {
       "song c"
   )
   
-  val bassist = Musician(Bass, songs)
+  val bassist = Musician("Ron Carter", Bass, songs)
   
   def musician = it
 
   describe("general musician tests") {
     musician("plays an instrument") {
       bassist.instrument should be (Bass)
+    }
+    
+    musician("has a name") {
+      bassist.name should be("Ron Carter")
     }
   }
   

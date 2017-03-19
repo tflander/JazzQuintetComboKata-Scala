@@ -1,11 +1,6 @@
 package todd.jazzQuintet
 
-class Bandstand {
-  val musicians = Seq(
-      Musician(Trumpet, null),
-      Musician(Saxophone, null),
-      Musician(Piano, null),
-      Musician(Bass, null),
-      Musician(Drums, null)
-  )
+class Bandstand(musiciansIn: Seq[Musician]) {
+  require(musiciansIn.size == 5, "Bandstand must be a quintet of 5 musicians.  Found " + musiciansIn.size)
+  val musicians = musiciansIn.sortBy { _.instrument.soloOrder }
 }
