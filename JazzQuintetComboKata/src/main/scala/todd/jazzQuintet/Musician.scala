@@ -54,11 +54,7 @@ def processMessage(message: Message) = {
     require(recipient == AllMusicians || recipient.asInstanceOf[Instrument] == instrument, "invalid message:to.  Got " + recipient + ", expected " + instrument)
 
     message.message match {
-//      case "requestSupply" => stonerMessageHander.requestSupply(message)
-//      case "takeSupply" => stonerMessageHander.takeSupply(message)
-//      case hitJointPattern(tokes) => stonerMessageHander.hitJoint(tokes.toInt, message)
-//      case "yourTurnToRoll" => stonerMessageHander.yourTurnToRoll(message)
-//      case "roll" => stonerMessageHander.roll(message)
+      case "callSong" => messageHandler.callSong(message)
       case unknownMessage => {
         println("ignoring message " + unknownMessage + " from: " + message.from + " to: " + message.to)
       }

@@ -6,6 +6,10 @@ class MessageHandler(musician: Musician, out: java.io.ByteArrayOutputStream = nu
 
   lazy val bandstand = musician.bandstand
   
+  def callSong(message: Message) {
+    log("todo call song")
+  }
+  
 //  def requestSupply(message: Message) {
 //    val supply = hippyCircle.getStonerById(message.to).supply.toString.toLowerCase
 //    log(message.from + " requested " + supply + " from " + message.to)
