@@ -65,14 +65,14 @@ def processMessage(message: Message) = {
 
 class MusicianActor(name: String, instrument: Instrument, songs: Seq[String], out: java.io.ByteArrayOutputStream = null) extends Musician(name, instrument, songs, out) with Actor {
   def receive: Actor.Receive = {
-    ???
+    case anything => println("received [" + anything +"] of type " + anything.getClass.getName)
   }  
 }
 
 
 object Musician {
   
-  implicit val system = ActorSystem("demo")
+//  implicit val system = ActorSystem("demo")
 
 //  def apply(name: String, instrument: Instrument, songs: Seq[String]) = ActorDSL.actor(new MusicianActor(name, instrument, songs))
   def apply(name: String, instrument: Instrument, songs: Seq[String]) = new Musician(name, instrument, songs)
