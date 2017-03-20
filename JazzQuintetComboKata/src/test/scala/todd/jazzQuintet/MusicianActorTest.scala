@@ -5,7 +5,6 @@ import akka.actor.ActorSystem
 
 class MusicianActorTest extends FunSpec with ShouldMatchers {
   
-  it("") {
     val out = new java.io.ByteArrayOutputStream
     val songs = Seq(
         "A Night in Tunesia",
@@ -13,9 +12,11 @@ class MusicianActorTest extends FunSpec with ShouldMatchers {
         "Blue Trane"
     )
     
-    implicit val system = ActorSystem("demo")
+  it("") {
+    
+    implicit val system = ActorSystem("MusicianActorTest")
     val bassist = ActorDSL.actor(new MusicianActor("Ralphe Armstrong", Bass, songs, out))
-    bassist ! "hello"
+    bassist ! Message(to = Some(AllMusicians), from = None, message = "Let's Jam")
   }
   
 }

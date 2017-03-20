@@ -65,16 +65,18 @@ def processMessage(message: Message) = {
 
 class MusicianActor(name: String, instrument: Instrument, songs: Seq[String], out: java.io.ByteArrayOutputStream = null) extends Musician(name, instrument, songs, out) with Actor {
   def receive: Actor.Receive = {
-    case anything => println("received [" + anything +"] of type " + anything.getClass.getName)
+    case msg: Message => {
+      println ("msg = [" + msg.message + "] From " + msg.from + " in thread " + Thread.currentThread.getName)
+      msg.message match {
+        case "Let's Jam" => println("Jam message")
+      }
+    }
+    case anything => println("received [" + anything +"] of type " + anything.getClass.getName + " in thread " + Thread.currentThread.getName)
   }  
 }
 
 
 object Musician {
-  
-//  implicit val system = ActorSystem("demo")
-
-//  def apply(name: String, instrument: Instrument, songs: Seq[String]) = ActorDSL.actor(new MusicianActor(name, instrument, songs))
   def apply(name: String, instrument: Instrument, songs: Seq[String]) = new Musician(name, instrument, songs)
 }
 
